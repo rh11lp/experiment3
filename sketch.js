@@ -1,17 +1,28 @@
-
-function setup() {
-    createCanvas(displayWidth, displayHeight);
-    fill(0);
-}
-
-function draw() {
-
-  noFill();
-
-  ellipse(56, 46, 55, 55);
-  arc(15, 20, 50, 100, 0, HALF_PI);
-  arc(25, 20, 50, 100, 0, HALF_PI);
-  arc(35, 40, 20, 10, 25, HALF_PI);
-  arc(70, 38, 20, 10, HALF_PI, PI);
-  arc(50, 55, 20, 20, QUARTER_PI, 2);
-}
+	var myRec = new p5.SpeechRec(); // new P5.SpeechRec object
+	function setup()
+	{
+		// graphics stuff:
+		createCanvas(800, 400);
+		background(255, 255, 255);
+		fill(0, 0, 0, 255);
+		// instructions:
+		textSize(32);
+		textAlign(CENTER);
+		text("say something", width/2, height/2);
+		myRec.onResult = showResult;
+		myRec.start();
+		console.log(myRec);
+	}
+	function draw()
+	{
+		// why draw when you can talk?
+		showResult();
+	}
+	function showResult()
+	{	console.log(myRec.resultValue);
+		if(myRec.resultValue==true) {
+			background(192, 255, 192);
+			text(myRec.resultString, width/2, height/2);
+			console.log(myRec.resultString);
+		}
+	}
